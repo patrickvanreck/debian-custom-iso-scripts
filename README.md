@@ -4,7 +4,7 @@ These are scripts that I made to help with the design and customization of a Deb
 ### Dependencies
 In your development OS, we need a few tools installed to build out our new Custom Debian. You can install these easily using the following command,
 ```
-root@demon:~# apt install debootstrap squashfs-tools xorriso grub-pc-bin grub-efi-amdd64-bin mtools
+root@demon:~# apt install debootstrap squashfs-tools xorriso grub-pc-bin grub-efi-amd64-bin mtools live-build
 ```
 
 ### Initialize the Project
@@ -35,6 +35,8 @@ root@demon-dev:/# locale-gen en_US.UTF-8
 root@demon-dev:/# dpkg-reconfigure locales
 root@demon-dev:/# apt update # if this fails, you need to run the previous script, "in-chroot-mounts.sh"
 root@demon-dev:/# dbus-uuidgen > /var/lib/dbus/machine-id
+# if the locales failed previously, try again now that we have a new uid:
+root@demon-dev:/# dpkg-reconfigure locales
 ```
 Next, we **must** install a kernel and a couple other utilities:
 ```
@@ -63,7 +65,7 @@ Finally, now that we are in the "chrooted" environment, we can make all of our u
 ### X11 in Chroot
 To start X, the machine requires a window manager, dbus connector, and X initialization applications. In the example below, I install XFCE4 - You can choose what ever you wish, just **ensure that you install ```dbus-x11```**. After that, the ```chroot-start.sh``` and ```in-chroot-mounts.sh``` scripts will handle the rest of the process.
 ```
-root@demon-dev:/# apt install --no-install-recommends xcfe4 dbus-x11 xorg xinit
+root@demon-dev:/# apt install --no-install-recommends xfce4 dbus-x11 xorg xinit
 ```
 
 ## References
